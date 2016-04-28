@@ -2,27 +2,28 @@
 <blueprint xmlns="http://www.osgi.org/xmlns/blueprint/v1.0.0"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xmlns:cm="http://aries.apache.org/blueprint/xmlns/blueprint-cm/v1.0.0"
+	xmlns:ext="http://aries.apache.org/blueprint/xmlns/blueprint-ext/v1.0.0"
        xsi:schemaLocation="
        http://www.osgi.org/xmlns/blueprint/v1.0.0 http://www.osgi.org/xmlns/blueprint/v1.0.0/blueprint.xsd
        http://camel.apache.org/schema/blueprint http://camel.apache.org/schema/blueprint/camel-blueprint.xsd">
 
-  <cm:property-placeholder persistent-id="fuse.blueprint.file.name">
+  <cm:property-placeholder persistent-id="fuse.blueprint.file.name" placeholder-prefix="$(" placeholder-suffix=")">
  	<cm:default-properties>
-	<cm:property name="fileName" value="DefaultName" />
+		<cm:property name="fileName" value="DefaultName" />
  	</cm:default-properties>
   </cm:property-placeholder>
 
-  // file coming from common-properties project
+  <!-- file coming from common-properties project -->
   <cm:property-placeholder persistent-id="fuse.blueprint.common">
  	<cm:default-properties>
-	<cm:property name="fileExtension" value="DefaultExtension" />
+		<cm:property name="fileExtension" value="DefaultExtension" />
  	</cm:default-properties>
   </cm:property-placeholder>
 
   <camelContext xmlns="http://camel.apache.org/schema/blueprint">
     <route id="file2file2">
-	<from uri="file:work/fuse-blueprint-2/input"></from>
-	<to uri="file:work/fuse-blueprint-2/output/?fileName={{fileName}}.{{fileExtension}}"></to>
+		<from uri="file:work/fuse-blueprint-2/input"></from>
+		<to uri="file:work/fuse-blueprint-2/output/?fileName={{fileName}}.{{fileExtension}}"></to>
     </route>
   </camelContext>
 
